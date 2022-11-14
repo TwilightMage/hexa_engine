@@ -6,10 +6,12 @@ project(hexa_engine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-if(WIN32)
-    add_compile_definitions(_WINDOWS)
-elseif(UNIX AND NOT APPLE)
-    add_compile_definitions(_LINUX)
-endif()
+file(GLOB HEXA_ENGINE_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB HEXA_ENGINE_HEADERS ${CMAKE_CURRENT_LIST_DIR}/include/hexa_engine/*.h)
+add_library(hexa_engine ${HEXA_ENGINE_SOURCES} ${HEXA_ENGINE_HEADERS})
 
-add_executable(hexa_engine main.cpp)
+add_dependencies(hexa_engine base_lib)
+target_include_directories(hexa_engine PUBLIC ${CMAKE_CURRENT_LIST_DIR}/base_lib/include)
+target_link_libraries(hexa_engine base_lib)
+
+set_output_directory(hexa_engine)
