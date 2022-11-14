@@ -1,0 +1,3 @@
+[submodule "base_lib"]
+	path = base_lib
+	url = git@github.com:TwilightMage/base_lib.git
