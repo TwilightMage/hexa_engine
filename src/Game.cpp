@@ -18,14 +18,14 @@
 #include "ui/TextBlock.h"
 #include "ui/UIInputElement.h"
 
+#include <OGRE/Bites/OgreTrays.h>
 #include <OGRE/OgreCompositorManager.h>
 #include <OGRE/OgreEntity.h>
 #include <OGRE/OgreGpuProgramManager.h>
 #include <OGRE/OgreRenderWindow.h>
-#include <OGRE/OgreShaderGenerator.h>
 #include <OGRE/OgreTechnique.h>
 #include <OGRE/OgreTextureManager.h>
-#include <OGRE/OgreTrays.h>
+#include <OGRE/RTShaderSystem/OgreShaderGenerator.h>
 #include <base_lib/File.h>
 #include <base_lib/Logger.h>
 #include <base_lib/Path.h>

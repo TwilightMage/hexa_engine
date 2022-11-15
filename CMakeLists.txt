@@ -2,15 +2,16 @@ cmake_minimum_required(VERSION 3.13)
 
 
 
-set(OIS_HOME "C:/Program Files (x86)/OIS/")
+set(OIS_HOME ${CMAKE_CURRENT_LIST_DIR}/third_party/OIS)
+set(OGRE_HOME ${CMAKE_CURRENT_LIST_DIR}/third_party/ogre)
 
 # include
-set(OGRE_DIR ${CMAKE_CURRENT_LIST_DIR}/third_party/ogre/cmake)
-find_package(OGRE REQUIRED COMPONENTS Bites RTShaderSystem CONFIG)
+#set(OGRE_DIR ${CMAKE_CURRENT_LIST_DIR}/third_party/ogre/cmake)
+#find_package(OGRE REQUIRED COMPONENTS Bites RTShaderSystem CONFIG)
 
-if(NOT "${OGRE_VERSION_MAJOR}" STREQUAL "13")
-    message(SEND_ERROR "You need Ogre 13 to build this.")
-endif()
+#if(NOT "${OGRE_VERSION_MAJOR}" STREQUAL "13")
+#    message(SEND_ERROR "You need Ogre 13 to build this.")
+#endif()
 
 include(base_lib/CMakeLists.txt)
 
@@ -25,12 +26,12 @@ setup_dll(hexa_engine "src/*.cpp" "include/hexa_engine/*.h")
 
 add_dependencies(hexa_engine base_lib)
 target_link_libraries(hexa_engine base_lib)
-target_link_libraries(hexa_engine ${OGRE_LIBRARIES})
-target_link_libraries(hexa_engine ${OIS_HOME}/lib)
+link_directories(hexa_engine "${OGRE_HOME}/lib/Release" "${OGRE_HOME}/SDK/lib")
+link_directories(hexa_engine ${OIS_HOME}/sdk/lib)
 
 target_include_directories(hexa_engine PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
-target_include_directories(hexa_engine PUBLIC ${OGRE_INCLUDE_DIRS})
-target_include_directories(hexa_engine PUBLIC ${OIS_HOME}/include)
+target_include_directories(hexa_engine PUBLIC ${OGRE_HOME}/SDK/include)
+target_include_directories(hexa_engine PUBLIC ${OIS_HOME}/sdk/include)
 
 
 

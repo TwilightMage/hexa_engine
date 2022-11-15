@@ -2,8 +2,6 @@
 
 #include "base_lib/Math.h"
 
-#include <map>
-
 Vector3 GeometryEditor::compute_normal(const Vector3& a, const Vector3& b, const Vector3& c)
 {
     return (c - a).cross_product(b - a).normalized();
@@ -83,7 +81,7 @@ void GeometryEditor::remove_indices(List<StaticMesh::Vertex>& vertices, List<uin
     }
 
     vertices = result;
-    indices = List<uint>::generate(indices.length(), [](uint i) -> uint { return i; });
+    indices = List<uint>(indices.length(), [](uint i) -> uint { return i; });
 }
 
 void GeometryEditor::invert_vertices(List<StaticMesh::Vertex>& vertices)
@@ -264,12 +262,12 @@ void GeometryEditor::compute_faces(const List<StaticMesh::Vertex>& vertices, con
         // order indices in counter-clockwise order
         Vector3 orient_axis_f = (vertices[face_vertex_indices[0]].pos - center).normalized();
         Vector3 orient_axis_l = orient_axis_f.cross_product(triangles[face[0]].normal);
-        std::map<uint, float> angles;
+        Map<uint, float> angles;
         for (uint i = 0; i < face_vertex_indices.length(); i++)
         {
             angles[face_vertex_indices[i]] = angle((vertices[face_vertex_indices[i]].pos - center).normalized(), orient_axis_f, orient_axis_l);
         }
-        face_vertex_indices.sort([&](uint a, uint b) -> bool {
+        face_vertex_indices.sort_predicate([&](uint a, uint b) -> bool {
             return angles[a] < angles[b];
         });
 
@@ -323,7 +321,7 @@ void GeometryEditor::compute_normals(List<StaticMesh::Vertex>& vertices, const L
 
 void GeometryEditor::remove_unused_vertices(List<StaticMesh::Vertex>& vertices, List<uint>& indices)
 {
-    List<bool> referred = List<bool>::generate(vertices.length(), false);
+    List<bool> referred = List<bool>(vertices.length(), false);
 
     for (auto index : indices)
     {

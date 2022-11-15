@@ -4,7 +4,6 @@
 #include "hexa_engine/CollisionMaskBits.h"
 #include "hexa_engine/Game.h"
 // #include "HexaGame/Entities/ItemDrop.h"
-#include "OGRE/OgreHardwarePixelBuffer.h"
 #include "hexa_engine/Audio.h"
 #include "hexa_engine/OgreApp.h"
 #include "hexa_engine/Settings.h"
@@ -13,6 +12,7 @@
 #include "hexa_engine/physics/RaycastCallback.h"
 
 #include <OGRE/OgreEntity.h>
+#include <OGRE/OgreHardwarePixelBuffer.h>
 #include <OGRE/OgreMesh.h>
 #include <OGRE/OgreRoot.h>
 #include <OGRE/OgreSceneManager.h>

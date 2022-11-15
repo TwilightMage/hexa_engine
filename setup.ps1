@@ -1,17 +1,17 @@
-# Self-elevate the script if required
-if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
- if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-  $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-  Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-  Exit
- }
-}
+## Self-elevate the script if required
+#if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+# if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+#  $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+#  Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+#  Exit
+# }
+#}
 
 Write-Output ">> Updating git submodules"
 git submodule update --init --recursive
 
 Write-Output "`n>> Configuring OIS"
-cmake -S .\third_party\OIS -B .\third_party\OIS\build
+cmake -S .\third_party\OIS -B .\third_party\OIS\build -DCMAKE_INSTALL_PREFIX=".\third_party\OIS\sdk\"
 
 Write-Output "`n>> Building OIS"
 cmake --build .\third_party\OIS\build --config Release
@@ -25,6 +25,8 @@ cmake -S .\third_party\ogre -B .\third_party\ogre -DOGRE_STATIC=TRUE -DOGRE_BUIL
 Write-Output "`n>> Building Ogre"
 #cmake --build .\third_party\ogre --config Debug
 cmake --build .\third_party\ogre --config Release
+
+Write-Output "`n>> Installing Ogre"
 cmake --build .\third_party\ogre --config Release --target INSTALL
 
 Read-Host -Prompt "Press any key to continue"

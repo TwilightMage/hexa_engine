@@ -7,3 +7,6 @@
 [submodule "third_party/OIS"]
 	path = third_party/OIS
 	url = git@github.com:wgois/OIS.git
+[submodule "third_party/reactphysics3d"]
+	path = third_party/reactphysics3d
+	url = git@github.com:DanielChappuis/reactphysics3d.git
