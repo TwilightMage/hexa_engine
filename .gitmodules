@@ -1,3 +1,9 @@
 [submodule "base_lib"]
 	path = base_lib
 	url = git@github.com:TwilightMage/base_lib.git
+[submodule "third_party/ogre"]
+	path = third_party/ogre
+	url = git@github.com:OGRECave/ogre.git
+[submodule "third_party/OIS"]
+	path = third_party/OIS
+	url = git@github.com:wgois/OIS.git
