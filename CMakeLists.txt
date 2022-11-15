@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.13)
 set(OGRE_HOME ${CMAKE_CURRENT_LIST_DIR}/third_party/ogre)
 set(OIS_HOME ${CMAKE_CURRENT_LIST_DIR}/third_party/OIS)
 set(RP3D_HOME ${CMAKE_CURRENT_LIST_DIR}/third_party/reactphysics3d)
+set(SOLOUD_HOME ${CMAKE_CURRENT_LIST_DIR}/third_party/soloud)
 
 # include
 #set(OGRE_DIR ${CMAKE_CURRENT_LIST_DIR}/third_party/ogre/cmake)
@@ -30,11 +31,13 @@ target_link_libraries(hexa_engine base_lib)
 link_directories(hexa_engine "${OGRE_HOME}/lib/Release" "${OGRE_HOME}/SDK/lib")
 link_directories(hexa_engine ${OIS_HOME}/sdk/lib)
 link_directories(hexa_engine ${RP3D_HOME}/sdk/lib)
+link_directories(hexa_engine ${SOLOUD_HOME}/sdk/lib)
 
 target_include_directories(hexa_engine PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 target_include_directories(hexa_engine PUBLIC ${OGRE_HOME}/SDK/include)
 target_include_directories(hexa_engine PUBLIC ${OIS_HOME}/sdk/include)
 target_include_directories(hexa_engine PUBLIC ${RP3D_HOME}/sdk/include)
+target_include_directories(hexa_engine PUBLIC ${SOLOUD_HOME}/sdk/include)
 
 
 

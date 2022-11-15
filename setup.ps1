@@ -12,6 +12,18 @@ git submodule update --init --recursive
 
 
 
+# SDL
+Write-Output "`n>> Configuring SDL"
+cmake -S .\third_party\SDL -B .\third_party\SDL\build -DCMAKE_INSTALL_PREFIX=".\third_party\SDL\sdk\"
+
+Write-Output "`n>> Building SDL"
+cmake --build .\third_party\SDL\build --config Release
+
+Write-Output "`n>> Installing SDL"
+cmake -DBUILD_TYPE=Release -P .\third_party\SDL\build\cmake_install.cmake
+
+
+
 # OIS
 Write-Output "`n>> Configuring OIS"
 cmake -S .\third_party\OIS -B .\third_party\OIS\build -DCMAKE_INSTALL_PREFIX=".\third_party\OIS\sdk\"
@@ -46,6 +58,19 @@ cmake --build .\third_party\reactphysics3d\build --config Release
 
 Write-Output "`n>> Installing reactphysics3d"
 cmake -DBUILD_TYPE=Release -P .\third_party\reactphysics3d\build\cmake_install.cmake
+
+
+
+# soloud
+Copy-Item .\setup_soloud.cmake .\third_party\soloud\CMakeLists.txt
+Write-Output "`n>> Configuring soloud"
+cmake -S .\third_party\soloud -B .\third_party\soloud\build -DCMAKE_INSTALL_PREFIX=".\third_party\soloud\sdk\"
+
+Write-Output "`n>> Building soloud"
+cmake --build .\third_party\soloud\build --config Release
+
+Write-Output "`n>> Installing soloud"
+cmake -DBUILD_TYPE=Release -P .\third_party\soloud\build\cmake_install.cmake
 
 
 
