@@ -14,7 +14,7 @@ git submodule update --init --recursive
 
 # SDL
 Write-Output "`n>> Configuring SDL"
-cmake -S .\third_party\SDL -B .\third_party\SDL\build -DCMAKE_INSTALL_PREFIX=".\third_party\SDL\sdk\"
+cmake -S .\third_party\SDL -B .\third_party\SDL\build -DCMAKE_INSTALL_PREFIX=".\third_party\SDL\sdk\" -DSDL_TEST=FALSE
 
 Write-Output "`n>> Building SDL"
 cmake --build .\third_party\SDL\build --config Release
@@ -23,25 +23,23 @@ Write-Output "`n>> Installing SDL"
 cmake -DBUILD_TYPE=Release -P .\third_party\SDL\build\cmake_install.cmake
 
 
+# zlib
+Write-Output "`n>> Configuring zlib"
+cmake -S .\third_party\zlib -B .\third_party\zlib\build -DCMAKE_INSTALL_PREFIX=".\third_party\zlib\sdk\"
 
-# OIS
-Write-Output "`n>> Configuring OIS"
-cmake -S .\third_party\OIS -B .\third_party\OIS\build -DCMAKE_INSTALL_PREFIX=".\third_party\OIS\sdk\"
+Write-Output "`n>> Building zlib"
+cmake --build .\third_party\zlib\build --config Release
 
-Write-Output "`n>> Building OIS"
-cmake --build .\third_party\OIS\build --config Release
-
-Write-Output "`n>> Installing OIS"
-cmake -DBUILD_TYPE=Release -P .\third_party\OIS\build\cmake_install.cmake
+Write-Output "`n>> Installing zlib"
+cmake -DBUILD_TYPE=Release -P .\third_party\zlib\build\cmake_install.cmake
 
 
 
 # Ogre
 Write-Output "`n>> Configuring Ogre"
-$env:OGRE_HOME = "$PSScriptRoot/third_party/ogre"
 $CXXFLAGS = $env:CXXFLAGS
 $env:CXXFLAGS += "/I`"$env:CG_INC_PATH`""
-cmake -S .\third_party\ogre -B .\third_party\ogre\build -DCMAKE_INSTALL_PREFIX=".\third_party\ogre\sdk\" -DOGRE_STATIC=TRUE -DOGRE_BUILD_RENDERSYSTEM_VULKAN=TRUE -DOGRE_BUILD_SAMPLES=FALSE -DOGRE_INSTALL_SAMPLES=FALSE -DOGRE_BUILD_COMPONENT_BULLET=FALSE -DOGRE_BUILD_COMPONENT_TERRAIN=FALSE -DOGRE_BUILD_TOOLS=FALSE -DOGRE_INSTALL_TOOLS=FALSE -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI=FALSE -DOGRE_BUILD_RENDERSYSTEM_GLES2=FALSE -DSDL2_DIR=".\third_party\SDL\build"
+cmake -S .\third_party\ogre -B .\third_party\ogre\build -DCMAKE_INSTALL_PREFIX=".\third_party\ogre\sdk\" -DOGRE_STATIC=TRUE -DOGRE_BUILD_RENDERSYSTEM_VULKAN=TRUE -DOGRE_BUILD_SAMPLES=FALSE -DOGRE_INSTALL_SAMPLES=FALSE -DOGRE_BUILD_COMPONENT_BULLET=FALSE -DOGRE_BUILD_COMPONENT_TERRAIN=FALSE -DOGRE_BUILD_TOOLS=FALSE -DOGRE_INSTALL_TOOLS=FALSE -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI=FALSE -DOGRE_BUILD_RENDERSYSTEM_GLES2=FALSE -DOGRE_BUILD_PLUGIN_STBI=FALSE -DOGRE_BUILD_PLUGIN_ASSIMP=FALSE -DOGRE_BUILD_PLUGIN_BSP=FALSE -DSDL2_DIR=".\third_party\SDL\sdk\cmake"
 $env:CXXFLAGS = $CXXFLAGS
 
 Write-Output "`n>> Building Ogre"

@@ -4,9 +4,6 @@
 [submodule "third_party/ogre"]
 	path = third_party/ogre
 	url = git@github.com:OGRECave/ogre.git
-[submodule "third_party/OIS"]
-	path = third_party/OIS
-	url = git@github.com:wgois/OIS.git
 [submodule "third_party/reactphysics3d"]
 	path = third_party/reactphysics3d
 	url = git@github.com:DanielChappuis/reactphysics3d.git
@@ -19,3 +16,6 @@
 [submodule "third_party/OBJ-Loader"]
 	path = third_party/OBJ-Loader
 	url = git@github.com:Bly7/OBJ-Loader.git
+[submodule "third_party/zlib"]
+	path = third_party/zlib
+	url = git@github.com:madler/zlib.git

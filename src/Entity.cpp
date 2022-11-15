@@ -8,7 +8,7 @@
 #include "base_lib/Assert.h"
 #include "hexa_engine/CollisionMaskBits.h"
 
-#include <OGRE/OgreSceneNode.h>
+#include <OgreSceneNode.h>
 #include <reactphysics3d/body/RigidBody.h>
 #include <reactphysics3d/engine/PhysicsCommon.h>
 

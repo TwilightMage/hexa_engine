@@ -4,7 +4,7 @@
 #include "hexa_engine/Game.h"
 #include "hexa_engine/World.h"
 
-#include <OGRE/OgreSceneManager.h>
+#include <OgreSceneManager.h>
 #include <glm/ext/matrix_transform.hpp>
 
 Ogre::Affine3 makeViewMatrix(const Ogre::Vector3& position, const Ogre::Quaternion& orientation, const Ogre::Affine3* reflectMatrix = 0)

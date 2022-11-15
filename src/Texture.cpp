@@ -5,8 +5,8 @@
 #include "base_lib/stb.h"
 #include "hexa_engine/Game.h"
 
-#include <OGRE/OgreTextureManager.h>
-#include <OGRE/OgreHardwarePixelBuffer.h>
+#include <OgreTextureManager.h>
+#include <OgreHardwarePixelBuffer.h>
 
 Texture::Texture()
 {

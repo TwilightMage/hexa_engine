@@ -3,10 +3,10 @@
 #include "hexa_engine/Material.h"
 #include "hexa_engine/Texture.h"
 
-#include <OGRE/OgreMaterial.h>
-#include <OGRE/OgreMaterialManager.h>
-#include <OGRE/OgreResourceGroupManager.h>
-#include <OGRE/OgreTextureManager.h>
+#include <OgreMaterial.h>
+#include <OgreMaterialManager.h>
+#include <OgreResourceGroupManager.h>
+#include <OgreTextureManager.h>
 #include <base_lib/Logger.h>
 
 Module::Module(const Name& module_name)

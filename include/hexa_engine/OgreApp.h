@@ -2,9 +2,9 @@
 
 #include "KeyCode.h"
 
-#include <OGRE/Bites/OgreApplicationContext.h>
-#include <OGRE/Bites/OgreTrays.h>
-#include <OGRE/Bites/OgreWindowEventUtilities.h>
+#include <Bites/OgreApplicationContext.h>
+#include <Bites/OgreTrays.h>
+#include <Bites/OgreWindowEventUtilities.h>
 #include <base_lib/Pointers.h>
 #include <base_lib/String.h>
 #include <base_lib/Vector2.h>

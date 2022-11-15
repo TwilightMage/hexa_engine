@@ -2,7 +2,7 @@
 
 #include "ModuleAssetID.h"
 
-#include <OGRE/OgreHeaderSuffix.h>
+#include <OgreHeaderSuffix.h>
 #include <base_lib/Array2D.h>
 #include <base_lib/Color.h>
 #include <base_lib/List.h>

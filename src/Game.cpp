@@ -12,14 +12,14 @@
 #include "hexa_engine/TableBase.h"
 #include "hexa_engine/World.h"
 
-#include <OGRE/Bites/OgreTrays.h>
-#include <OGRE/OgreCompositorManager.h>
-#include <OGRE/OgreEntity.h>
-#include <OGRE/OgreGpuProgramManager.h>
-#include <OGRE/OgreRenderWindow.h>
-#include <OGRE/OgreTechnique.h>
-#include <OGRE/OgreTextureManager.h>
-#include <OGRE/RTShaderSystem/OgreShaderGenerator.h>
+#include <Bites/OgreTrays.h>
+#include <OgreCompositorManager.h>
+#include <OgreEntity.h>
+#include <OgreGpuProgramManager.h>
+#include <OgreRenderWindow.h>
+#include <OgreTechnique.h>
+#include <OgreTextureManager.h>
+#include <RTShaderSystem/OgreShaderGenerator.h>
 #include <base_lib/File.h>
 #include <base_lib/Logger.h>
 #include <base_lib/Path.h>

@@ -8,12 +8,12 @@
 #include "hexa_engine/physics/SphereCollision.h"
 
 #include <OBJ_Loader.h>
-#include <OGRE/OgreHardwareBufferManager.h>
-#include <OGRE/OgreMesh.h>
-#include <OGRE/OgreMeshManager.h>
-#include <OGRE/OgreResourceGroupManager.h>
-#include <OGRE/OgreSubMesh.h>
-#include <OGRE/OgreVertexIndexData.h>
+#include <OgreHardwareBufferManager.h>
+#include <OgreMesh.h>
+#include <OgreMeshManager.h>
+#include <OgreResourceGroupManager.h>
+#include <OgreSubMesh.h>
+#include <OgreVertexIndexData.h>
 #include <base_lib/Assert.h>
 #include <base_lib/File.h>
 #include <base_lib/performance.h>

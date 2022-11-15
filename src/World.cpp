@@ -11,12 +11,12 @@
 #include "hexa_engine/Texture.h"
 #include "hexa_engine/physics/RaycastCallback.h"
 
-#include <OGRE/OgreEntity.h>
-#include <OGRE/OgreHardwarePixelBuffer.h>
-#include <OGRE/OgreMesh.h>
-#include <OGRE/OgreRoot.h>
-#include <OGRE/OgreSceneManager.h>
-#include <OGRE/OgreSubEntity.h>
+#include <OgreEntity.h>
+#include <OgreHardwarePixelBuffer.h>
+#include <OgreMesh.h>
+#include <OgreRoot.h>
+#include <OgreSceneManager.h>
+#include <OgreSubEntity.h>
 #include <base_lib/Quaternion.h>
 #include <reactphysics3d/reactphysics3d.h>
 #include <soloud/soloud_wav.h>

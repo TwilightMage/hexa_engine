@@ -7,13 +7,13 @@
 #include "hexa_engine/World.h"
 #include "hexa_engine/physics/Collision.h"
 
-#include <OGRE/OgreEntity.h>
-#include <OGRE/OgreInstancedEntity.h>
-#include <OGRE/OgreMaterialManager.h>
-#include <OGRE/OgreMesh.h>
-#include <OGRE/OgreSceneManager.h>
-#include <OGRE/OgreSceneNode.h>
-#include <OGRE/OgreSubEntity.h>
+#include <OgreEntity.h>
+#include <OgreInstancedEntity.h>
+#include <OgreMaterialManager.h>
+#include <OgreMesh.h>
+#include <OgreSceneManager.h>
+#include <OgreSceneNode.h>
+#include <OgreSubEntity.h>
 #include <reactphysics3d/body/RigidBody.h>
 #include <reactphysics3d/collision/Collider.h>
 #include <reactphysics3d/engine/PhysicsWorld.h>
