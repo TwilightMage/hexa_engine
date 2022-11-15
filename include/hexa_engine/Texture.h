@@ -49,8 +49,6 @@ public:
     const ModuleAssetID& get_id() const { return id_; }
 
 private:
-    Array2D<Color> pixels_;
-
     Shared<Ogre::Texture> ogre_texture_;
     ModuleAssetID id_;
 };

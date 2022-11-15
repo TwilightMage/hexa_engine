@@ -1,7 +1,5 @@
 ﻿#include "hexa_engine/Game.h"
 
-#include "GBuffer/DeferredLightCP.h"
-#include "GBuffer/GBufferSchemeHandler.h"
 #include "hexa_engine/AudioChannel.h"
 #include "hexa_engine/CameraComponent.h"
 #include "hexa_engine/Material.h"
@@ -10,13 +8,9 @@
 #include "hexa_engine/Paths.h"
 #include "hexa_engine/SaveGame.h"
 #include "hexa_engine/Settings.h"
-#include "hexa_engine/SpriteFont.h"
 #include "hexa_engine/StaticMesh.h"
 #include "hexa_engine/TableBase.h"
 #include "hexa_engine/World.h"
-#include "ui/Image.h"
-#include "ui/TextBlock.h"
-#include "ui/UIInputElement.h"
 
 #include <OGRE/Bites/OgreTrays.h>
 #include <OGRE/OgreCompositorManager.h>
@@ -49,7 +43,6 @@ Game::Game(const String& name, int argc, char* argv[])
     , physics_(new reactphysics3d::PhysicsCommon)
     , soloud_(new SoLoud::Soloud)
     , ogre_app_(new OgreApp(name))
-    , ui_root_(new UIElement)
 {
     if (instance_)
     {

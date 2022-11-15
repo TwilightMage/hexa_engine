@@ -6,14 +6,17 @@
 #include "hexa_engine/Game.h"
 
 #include <OGRE/OgreTextureManager.h>
+#include <OGRE/OgreHardwarePixelBuffer.h>
 
 Texture::Texture()
 {
+    ogre_texture_ = Ogre::TextureManager::getSingletonPtr()->create("", "");
 }
 
 Texture::Texture(const Array2D<Color>& pixels)
-    : pixels_(pixels)
+    : Texture()
 {
+    put_pixels(pixels);
 }
 
 Texture::Texture(uint width, uint height, const List<Color>& pixels)
@@ -23,8 +26,13 @@ Texture::Texture(uint width, uint height, const List<Color>& pixels)
 
 Shared<Texture> Texture::load_png(const Path& path)
 {
-    assert(false);
-    return nullptr;
+    uint w, h;
+    Array2D<Color> colors = stb::load(path, w, h);
+
+    auto result = MakeShared<Texture>();
+    result->put_pixels(colors);
+
+    return result;
 
     /*if (const auto found = Game::instance_->textures_.find(path.get_absolute_string()))
     {
@@ -62,27 +70,31 @@ Shared<Texture> Texture::load_png(const Path& path)
 
 uint Texture::get_width() const
 {
-    return pixels_.get_size_x();
+    return ogre_texture_->getWidth();
 }
 
 uint Texture::get_height() const
 {
-    return pixels_.get_size_y();
+    return ogre_texture_->getHeight();
 }
 
 Vector2 Texture::get_size() const
 {
-    return Vector2(static_cast<float>(pixels_.get_size_x()), static_cast<float>(pixels_.get_size_y()));
+    return Vector2(static_cast<float>(ogre_texture_->getWidth()), static_cast<float>(ogre_texture_->getHeight()));
 }
 
 Color Texture::get_pixel(uint x, uint y) const
 {
-    return pixels_.at(x, y);
+    Color pixel;
+    ogre_texture_->getBuffer()->readData((y * ogre_texture_->getWidth() + x) * sizeof(Color), sizeof(Color), &pixel);
+    return pixel;
 }
 
 void Texture::save_to_file(const Path& path)
 {
-    stb::save_bmp(path, pixels_.get_size_x(), pixels_.get_size_y(), pixels_);
+    Ogre::Image img;
+    ogre_texture_->convertToImage(img);
+    img.save(path.get_absolute_string().c());
 }
 
 void Texture::put_pixels(const Array2D<Color>& pixels)
@@ -92,14 +104,5 @@ void Texture::put_pixels(const Array2D<Color>& pixels)
 
 void Texture::put_pixels(uint width, uint height, const List<Color>& pixels)
 {
-    if (edit_count_ == 0 && pixels_.get_size_x() == width && pixels_.get_size_y() == height)
-    {
-        pixels_ = Array2D(width, height, pixels);
-
-        if (usage_count() > 0)
-        {
-            unload();
-            load_internal();
-        }
-    }
+    ogre_texture_->loadImage(Ogre::Image(Ogre::PF_R8G8B8A8, width, height, 4, (byte*)pixels.get_data()));
 }

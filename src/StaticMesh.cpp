@@ -7,7 +7,7 @@
 #include "hexa_engine/physics/ConvexMeshCollision.h"
 #include "hexa_engine/physics/SphereCollision.h"
 
-#include <OBJ-Loader/OBJ_Loader.h>
+#include <OBJ_Loader.h>
 #include <OGRE/OgreHardwareBufferManager.h>
 #include <OGRE/OgreMesh.h>
 #include <OGRE/OgreMeshManager.h>
@@ -67,8 +67,7 @@ void StaticMesh::SubMesh::add(const List<Vertex>& new_vertices, const List<uint>
 }
 
 StaticMesh::StaticMesh(const String& name)
-    : Object(name)
-    , instanced_(false)
+    : instanced_(false)
 {
 }
 
@@ -213,7 +212,7 @@ Shared<StaticMesh> StaticMesh::create(const String& name, const List<SubMesh>& s
                     sub_bounds.add(cast_object<Vector3>(vert.pos));
                 }
 
-                result->collisions_.add(CollisionShapeInfo(sub_bounds.get_center(), Quaternion(), MakeShared<SphereCollision>(sub_bounds.get_extents().get_min_axis())));
+                result->collisions_.add({sub_bounds.get_center(), Quaternion(), MakeShared<SphereCollision>(sub_bounds.get_extents().get_min_axis())});
             }
         }
         else if (sub_mesh.name.starts_with("BOX_")) // Box collision
@@ -310,7 +309,7 @@ Shared<StaticMesh> StaticMesh::create(const String& name, const List<SubMesh>& s
                             2);
                     Vector3 box_center = (triangles[0].center + triangles[1].center + triangles[2].center + triangles[3].center + triangles[4].center + triangles[5].center + triangles[6].center + triangles[7].center + triangles[8].center + triangles[9].center + triangles[10].center + triangles[11].center) / 12.f;
 
-                    result->collisions_.add(CollisionShapeInfo(box_center, box_rotation, MakeShared<BoxCollision>(box_size)));
+                    result->collisions_.add({box_center, box_rotation, MakeShared<BoxCollision>(box_size)});
                 }
                 else
                 {
@@ -339,7 +338,7 @@ Shared<StaticMesh> StaticMesh::create(const String& name, const List<SubMesh>& s
                     }
                 }
 
-                result->collisions_.add(CollisionShapeInfo(sub_mesh_center, Quaternion(), MakeShared<ConvexMeshCollision>(vertices, sub_mesh.indices)));
+                result->collisions_.add({sub_mesh_center, Quaternion(), MakeShared<ConvexMeshCollision>(vertices, sub_mesh.indices)});
             }
         }
         else // Visible mesh
@@ -392,11 +391,11 @@ Shared<StaticMesh> StaticMesh::create(const String& name, const List<SubMesh>& s
 
     if (collision_mode == AutoCollisionMode::Complex)
     {
-        result->collisions_.add(CollisionShapeInfo(Vector3::zero(), Quaternion(), MakeShared<ConcaveMeshCollision>(vertices_copy, indices_copy)));
+        result->collisions_.add({Vector3::zero(), Quaternion(), MakeShared<ConcaveMeshCollision>(vertices_copy, indices_copy)});
     }
     else if (collision_mode == AutoCollisionMode::Convex)
     {
-        result->collisions_.add(CollisionShapeInfo(Vector3::zero(), Quaternion(), MakeShared<ConvexMeshCollision>(vertices_copy, indices_copy)));
+        result->collisions_.add({Vector3::zero(), Quaternion(), MakeShared<ConvexMeshCollision>(vertices_copy, indices_copy)});
     }
 
     result->ogre_mesh_->_setBounds(Ogre::AxisAlignedBox(cast_object<Ogre::Vector3>(visual_bounds.min), cast_object<Ogre::Vector3>(visual_bounds.max)));

@@ -38,14 +38,17 @@ cmake -DBUILD_TYPE=Release -P .\third_party\OIS\build\cmake_install.cmake
 
 # Ogre
 Write-Output "`n>> Configuring Ogre"
-cmake -S .\third_party\ogre -B .\third_party\ogre -DOGRE_STATIC=TRUE -DOGRE_BUILD_RENDERSYSTEM_VULKAN=TRUE -DOGRE_BUILD_SAMPLES=FALSE -DOGRE_INSTALL_SAMPLES=FALSE -DOGRE_BUILD_COMPONENT_BULLET=FALSE -DOGRE_BUILD_COMPONENT_TERRAIN=FALSE -DOGRE_BUILD_TOOLS=FALSE -DOGRE_INSTALL_TOOLS=FALSE -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI=FALSE -DOGRE_BUILD_RENDERSYSTEM_GLES2=FALSE
+$env:OGRE_HOME = "$PSScriptRoot/third_party/ogre"
+$CXXFLAGS = $env:CXXFLAGS
+$env:CXXFLAGS += "/I`"$env:CG_INC_PATH`""
+cmake -S .\third_party\ogre -B .\third_party\ogre\build -DCMAKE_INSTALL_PREFIX=".\third_party\ogre\sdk\" -DOGRE_STATIC=TRUE -DOGRE_BUILD_RENDERSYSTEM_VULKAN=TRUE -DOGRE_BUILD_SAMPLES=FALSE -DOGRE_INSTALL_SAMPLES=FALSE -DOGRE_BUILD_COMPONENT_BULLET=FALSE -DOGRE_BUILD_COMPONENT_TERRAIN=FALSE -DOGRE_BUILD_TOOLS=FALSE -DOGRE_INSTALL_TOOLS=FALSE -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI=FALSE -DOGRE_BUILD_RENDERSYSTEM_GLES2=FALSE -DSDL2_DIR=".\third_party\SDL\build"
+$env:CXXFLAGS = $CXXFLAGS
 
 Write-Output "`n>> Building Ogre"
-#cmake --build .\third_party\ogre --config Debug
-cmake --build .\third_party\ogre --config Release
+cmake --build .\third_party\ogre\build --config Release
 
 Write-Output "`n>> Installing Ogre"
-cmake --build .\third_party\ogre --config Release --target install
+cmake --build .\third_party\ogre\build --config Release --target install
 
 
 
