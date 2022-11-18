@@ -26,7 +26,7 @@ MeshComponent::MeshComponent(const Shared<StaticMesh>& mesh, const List<Shared<M
 }
 
 MeshComponent::MeshComponent(const Shared<StaticMesh>& mesh, const Shared<Material>& material)
-    : MeshComponent(mesh, List<Shared<Material>>::generate(mesh->ogre_mesh_->getNumSubMeshes(), material))
+    : MeshComponent(mesh, List<Shared<Material>>(mesh->ogre_mesh_->getNumSubMeshes(), material))
 {
 }
 
@@ -82,7 +82,7 @@ void MeshComponent::set_mesh(const Shared<StaticMesh>& mesh)
 
 void MeshComponent::set_mesh(const Shared<StaticMesh>& mesh, const Shared<Material>& material)
 {
-    set_mesh(mesh, List<Shared<Material>>::generate(mesh ? mesh->ogre_mesh_->getNumSubMeshes() : 0, material));
+    set_mesh(mesh, List<Shared<Material>>(mesh ? mesh->ogre_mesh_->getNumSubMeshes() : 0, material));
 }
 
 void MeshComponent::set_mesh(const Shared<StaticMesh>& mesh, const List<Shared<Material>>& materials)
@@ -239,7 +239,7 @@ void MeshComponent::spawn_mesh(const Shared<Entity>& owner, const Shared<World>&
     }
     else
     {
-        ogre_entity_ = world->manager_->createEntity(mesh_->name.c());
+        ogre_entity_ = world->manager_->createEntity(mesh_->name_.c());
 
         for (uint i = 0; i < materials_.length(); i++)
         {
@@ -303,7 +303,7 @@ void MeshComponent::destroy_mesh(const Shared<Entity>& owner, const Shared<World
     }
 }
 
-const Shared<Material>& MeshComponent::get_valid_material(uint slot)
+Shared<Material> MeshComponent::get_valid_material(uint slot)
 {
-    return materials_[slot] ? materials_[slot] : Game::get_basic_material(mesh_->instanced_);
+    return materials_[slot] ? materials_[slot] : Game::get_basic_material();
 }

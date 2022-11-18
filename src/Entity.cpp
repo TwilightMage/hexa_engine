@@ -5,7 +5,7 @@
 #include "hexa_engine/physics/Collision.h"
 #include "hexa_engine/StaticMesh.h"
 #include "hexa_engine/World.h"
-#include "base_lib/Assert.h"
+#include <base_lib/Assert.h>
 #include "hexa_engine/CollisionMaskBits.h"
 
 #include <OgreSceneNode.h>

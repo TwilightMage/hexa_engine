@@ -1,6 +1,6 @@
 #include "hexa_engine/Settings.h"
 
-#include "base_lib/Math.h"
+#include <base_lib/Math.h>
 
 void Settings::read_settings(const Compound::Object& compound)
 {

@@ -7,20 +7,17 @@
 #include <OgreMaterial.h>
 #include <OgreTechnique.h>
 
-uint Material::get_textures_count() const
-{
+uint Material::get_textures_count() const {
     return ogre_material_->getTechnique(0)->getPass(0)->getNumTextureUnitStates();
 }
 
-Shared<Texture> Material::get_texture(uint index) const
-{
+Shared<Texture> Material::get_texture(uint index) const {
     if (index >= textures_.length()) return nullptr;
 
     return textures_[index];
 }
 
-void Material::set_texture(const Shared<Texture>& texture, uint index)
-{
+void Material::set_texture(const Shared<Texture>& texture, uint index) {
     if (index >= textures_.length()) return;
 
     textures_[index] = texture;

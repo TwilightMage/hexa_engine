@@ -35,49 +35,49 @@ String ModuleAssetID::to_string() const
     return module_name.to_string() + ":" + asset_name.to_string();
 }
 
-Path ModuleAssetID::evaluate_asset_path() const
-{
-    if (auto module = Game::get_module_by_name(module_name))
-    {
-        return module->get_module_path("resources/" + asset_name.to_string());
-    }
+//Path ModuleAssetID::evaluate_asset_path() const
+//{
+//    if (auto module = Game::get_module_by_name(module_name))
+//    {
+//        return module->get_module_path("resources/" + asset_name.to_string());
+//    }
+//
+//    return Path();
+//}
+//
+//ModuleAssetID ModuleAssetID::evaluate_asset_id_from_path(const Path& path)
+//{
+//    const String game_path = Game::get_instance()->get_module_path().get_absolute_string();
+//    const String asset_path = path.get_absolute_string();
+//
+//    if (asset_path.starts_with(game_path))
+//    {
+//        auto relative_path = asset_path.substring(game_path.length() + 1);
+//
+//        if (relative_path.starts_with("mods/"))
+//        {
+//            relative_path = relative_path.substring(relative_path.index_of("/") + 1);
+//
+//            const String module_name = relative_path.substring(relative_path.index_of("/"));
+//            relative_path = relative_path.substring(relative_path.index_of("/") + 1);
+//
+//            if (relative_path.starts_with("resources/"))
+//            {
+//                relative_path = relative_path.substring(relative_path.index_of("/") + 1);
+//
+//                return ModuleAssetID(Name(module_name), Name(relative_path));
+//            }
+//        }
+//        else
+//        {
+//            return ModuleAssetID(relative_path);
+//        }
+//    }
+//
+//    return ModuleAssetID();
+//}
 
-    return Path();
-}
-
-ModuleAssetID ModuleAssetID::evaluate_asset_id_from_path(const Path& path)
-{
-    const String game_path = Game::get_instance()->get_module_path().get_absolute_string();
-    const String asset_path = path.get_absolute_string();
-
-    if (asset_path.starts_with(game_path))
-    {
-        auto relative_path = asset_path.substring(game_path.length() + 1);
-
-        if (relative_path.starts_with("mods/"))
-        {
-            relative_path = relative_path.substring(relative_path.index_of("/") + 1);
-
-            const String module_name = relative_path.substring(relative_path.index_of("/"));
-            relative_path = relative_path.substring(relative_path.index_of("/") + 1);
-
-            if (relative_path.starts_with("resources/"))
-            {
-                relative_path = relative_path.substring(relative_path.index_of("/") + 1);
-
-                return ModuleAssetID(Name(module_name), Name(relative_path));
-            }
-        }
-        else
-        {
-            return ModuleAssetID(relative_path);
-        }
-    }
-
-    return ModuleAssetID();
-}
-
-const Shared<Module>& ModuleAssetID::get_module_reference() const
+Shared<Module> ModuleAssetID::get_module_reference() const
 {
     return Game::get_instance()->get_module_by_name(module_name);
 }

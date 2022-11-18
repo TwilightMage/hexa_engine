@@ -16,7 +16,7 @@ public:
     ~BoxCollision();
 
 private:
-    FORCEINLINE reactphysics3d::CollisionShape* get_collider_shape() const override;
+    reactphysics3d::CollisionShape* get_collider_shape() const override;
 
     reactphysics3d::BoxShape* shape_;
 };

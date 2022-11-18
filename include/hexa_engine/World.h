@@ -19,28 +19,24 @@ struct RaycastResult;
 class Game;
 class Entity;
 
-namespace reactphysics3d
-{
+namespace reactphysics3d {
     class PhysicsWorld;
 }
 
-namespace Ogre
-{
+namespace Ogre {
     class InstanceManager;
     class Light;
     class SceneNode;
     class SceneManager;
 } // namespace Ogre
 
-class EXPORT World : public EnableSharedFromThis<World>
-{
+class EXPORT World : public EnableSharedFromThis<World> {
     friend Game;
     friend MeshComponent;
     friend CameraComponent;
     friend Entity;
 
-    struct TimerEntry
-    {
+    struct TimerEntry {
         float time;
         std::function<void()> func;
     };
@@ -48,9 +44,9 @@ class EXPORT World : public EnableSharedFromThis<World>
 public:
     bool spawn_entity(const Shared<Entity>& entity, const Transform& transform);
     bool spawn_entity(const Shared<Entity>& entity);
+
     template<typename T, typename... Args>
-    Shared<T> spawn_entity(const Transform& transform, Args... args)
-    {
+    Shared<T> spawn_entity(const Transform& transform, Args ... args) {
         auto entity = MakeShared<T>(std::forward<Args>(args)...);
         entity->transform_ = transform;
         spawn_entity_internal(entity);
@@ -77,7 +73,7 @@ public:
     Vector3 get_gravity() const;
     void set_gravity(const Vector3& val) const;
 
-    FORCEINLINE float get_time() const { return time_; }
+    float get_time() const { return time_; }
 
     TimerHandle delay(float time, std::function<void()> func);
 

@@ -72,8 +72,8 @@ public:
 
     uint get_material_count() const;
 
-    FORCEINLINE const Vector3& get_bounds_center() const;
-    FORCEINLINE const Vector3& get_bounds_half_size() const;
+    const Vector3& get_bounds_center() const;
+    const Vector3& get_bounds_half_size() const;
     bool is_empty() const;
 
     void make_instanced();

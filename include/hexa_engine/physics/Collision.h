@@ -16,5 +16,5 @@ public:
     virtual reactphysics3d::CollisionShape* get_collider_shape() const = 0;
 
 protected:
-    FORCEINLINE static Shared<reactphysics3d::PhysicsCommon> get_physics();
+    static Shared<reactphysics3d::PhysicsCommon> get_physics();
 };

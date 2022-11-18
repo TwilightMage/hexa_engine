@@ -21,10 +21,10 @@ public:
     static Shared<Audio> load(const Path& path);
 
     void set_looped(bool looped);
-    FORCEINLINE bool is_looped() const { return looped_; }
+    bool is_looped() const { return looped_; }
 
     void set_default_volume(float volume);
-    FORCEINLINE float get_default_volume() const { return default_volume_; }
+    float get_default_volume() const { return default_volume_; }
 
     float get_duration() const;
 

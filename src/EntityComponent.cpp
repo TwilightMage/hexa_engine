@@ -1,26 +1,21 @@
 ﻿#include "hexa_engine/EntityComponent.h"
 
-#include "Entity.h"
+#include "hexa_engine/Entity.h"
 
-Shared<Entity> EntityComponent::get_owner() const
-{
+Shared<Entity> EntityComponent::get_owner() const {
     return owner_->shared_from_this();
 }
 
-void EntityComponent::on_start()
-{
+void EntityComponent::on_start() {
 }
 
-void EntityComponent::on_tick(float delta_time)
-{
+void EntityComponent::on_tick(float delta_time) {
 }
 
-void EntityComponent::on_destroy()
-{
+void EntityComponent::on_destroy() {
 }
 
-void EntityComponent::start()
-{
+void EntityComponent::start() {
     started_ = true;
 
     on_start();

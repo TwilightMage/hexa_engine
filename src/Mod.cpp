@@ -11,9 +11,13 @@ Mod::Mod(const Name& module_name)
 {
 }
 
+String Mod::Info::get_full_display_name() const {
+    return display_name + " " + mod_version.to_string();
+}
+
 Path Mod::get_module_path(const String& sub_path) const
 {
-    return "./mods/" + get_module_name().to_string() + "/" + sub_path;
+    return Path("./mods/" + get_module_name().to_string() + "/" + sub_path);
 }
 
 const Mod::Info& Mod::get_mod_info() const

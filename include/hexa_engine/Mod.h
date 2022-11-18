@@ -20,6 +20,8 @@ public:
     {
         void ReadFrom(const String& path);
 
+        String get_full_display_name() const;
+
         String name;
         String display_name;
         Version mod_version;

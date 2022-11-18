@@ -21,7 +21,7 @@ public:
         return records_.find_or_default(key);
     }
 
-    FORCEINLINE const Map<ModuleAssetID, T*>& records() const { return records_; }
+    const Map<ModuleAssetID, T*>& records() const { return records_; }
 
     void add_record(const ModuleAssetID& id, const T& new_record, bool force_replace = false)
     {

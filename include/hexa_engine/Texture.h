@@ -16,39 +16,30 @@ class Game;
 class UIElement;
 class Image;
 
-namespace Ogre
-{
+namespace Ogre {
     class Texture;
 }
 
-class EXPORT Texture
-{
+class EXPORT Texture {
 private:
-    friend Game;
     friend Module;
     friend Material;
 
 public:
-    Texture();
-    explicit Texture(const Array2D<Color>& pixels);
-    Texture(uint width, uint height, const List<Color>& pixels);
-
-    static Shared<Texture> load_png(const Path& path);
-
     uint get_width() const;
     uint get_height() const;
-    Vector2 get_size() const;
     Color get_pixel(uint x, uint y) const;
 
     void save_to_file(const Path& path);
 
     void put_pixels(const Array2D<Color>& pixels);
-    const Array2D<Color>& get_pixels() const { return pixels_; }
-    void put_pixels(uint width, uint height, const List<Color>& pixels);
+    Array2D<Color> get_pixels() const;
 
     const ModuleAssetID& get_id() const { return id_; }
 
 private:
+    Texture();
+
     Shared<Ogre::Texture> ogre_texture_;
     ModuleAssetID id_;
 };

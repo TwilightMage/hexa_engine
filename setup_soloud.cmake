@@ -22,10 +22,10 @@ set_target_properties(soloud
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/build/${CMAKE_BUILD_TYPE}"
         )
 
-link_directories(soloud ${SDL_HOME}/sdk/lib)
+link_directories(soloud ${SDL_HOME}/sdk/${CMAKE_BUILD_TYPE}/lib)
 
 target_include_directories(soloud PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
-target_include_directories(soloud PUBLIC ${SDL_HOME}/sdk/include/SDL2)
+target_include_directories(soloud PUBLIC ${SDL_HOME}/sdk/${CMAKE_BUILD_TYPE}/include/SDL2)
 
 set_target_properties(soloud PROPERTIES PUBLIC_HEADER "${SOLOUD_HEADERS}")
 

@@ -45,18 +45,18 @@ public:
 
     bool is_started() const;
 
-    FORCEINLINE const Transform& get_transform() const { return transform_; }
+    const Transform& get_transform() const { return transform_; }
     void set_transform(const Transform& transform);
 
-    FORCEINLINE Vector3 get_location() const { return get_transform().location; }
+    Vector3 get_location() const { return get_transform().location; }
     void set_location(const Vector3& location);
-    FORCEINLINE void translate(const Vector3& translation);
+    void translate(const Vector3& translation);
 
-    FORCEINLINE Quaternion get_rotation() const { return get_transform().rotation; }
+    Quaternion get_rotation() const { return get_transform().rotation; }
     void set_rotation(const Quaternion& rot);
     void rotate(const Vector3& axis, float angle);
 
-    FORCEINLINE Vector3 get_scale() const { return get_transform().scale; }
+    Vector3 get_scale() const { return get_transform().scale; }
     void set_scale(const Vector3& scale);
 
     void set_collision(const Shared<Collision>& collision, const Vector3& offset = Vector3::zero());
@@ -121,7 +121,7 @@ public:
     }
 
     void set_tick_enabled(bool state);
-    FORCEINLINE bool is_tick_enabled() const { return tick_enabled_; }
+    bool is_tick_enabled() const { return tick_enabled_; }
 
     Delegate<const Shared<Entity>&> on_destroyed;
 

@@ -45,7 +45,7 @@ public:
     void on_start() override;
     void on_destroy() override;
 
-    FORCEINLINE Shared<StaticMesh> get_mesh() const { return mesh_; }
+    Shared<StaticMesh> get_mesh() const { return mesh_; }
     void set_mesh(const Shared<StaticMesh>& mesh);
     void set_mesh(const Shared<StaticMesh>& mesh, const Shared<Material>& material);
     void set_mesh(const Shared<StaticMesh>& mesh, const List<Shared<Material>>& materials);
@@ -56,17 +56,17 @@ public:
 
     void set_material_parameter(Quaternion value, uint material_slot, uint parameter_index);
 
-    FORCEINLINE PhysicalBodyType get_body_type() const { return body_type_; }
+    PhysicalBodyType get_body_type() const { return body_type_; }
     void set_body_type(PhysicalBodyType body_type);
 
-    FORCEINLINE bool is_visible() const { return is_visible_; }
+    bool is_visible() const { return is_visible_; }
     void set_visibility(bool state);
 
 private:
-    FORCEINLINE void spawn_mesh(const Shared<Entity>& owner, const Shared<World>& world);
-    FORCEINLINE void update_visibility();
-    FORCEINLINE void destroy_mesh(const Shared<Entity>& owner, const Shared<World>& world);
-    FORCEINLINE const Shared<Material>& get_valid_material(uint slot);
+    void spawn_mesh(const Shared<Entity>& owner, const Shared<World>& world);
+    void update_visibility();
+    void destroy_mesh(const Shared<Entity>& owner, const Shared<World>& world);
+    Shared<Material> get_valid_material(uint slot);
 
     Shared<StaticMesh> mesh_;
     List<Shared<Material>> materials_;

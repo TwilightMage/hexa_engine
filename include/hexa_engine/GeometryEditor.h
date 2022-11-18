@@ -16,7 +16,7 @@ public:
         uint index;
     };
 
-    FORCEINLINE static Vector3 compute_normal(const Vector3& a, const Vector3& b, const Vector3& c);
+    static Vector3 compute_normal(const Vector3& a, const Vector3& b, const Vector3& c);
 
     // merge vertices, same by pos, uv and normal
     static void optimize(List<StaticMesh::Vertex>& vertices, List<uint>& indices);

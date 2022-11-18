@@ -1,5 +1,5 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
-#include "hexa_engine/pch.h"
+#include <base_lib/version.h>
 
 const Version engine_version = Version(0, 1, 0);
 

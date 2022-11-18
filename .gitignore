@@ -8,4 +8,6 @@ riderModule.iml
 build/
 intermediate/
 *.user
-cmake-*/
+cmake-build-*/
+third_party/*/build/
+third_party/*/sdk/

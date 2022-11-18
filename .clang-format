@@ -13,10 +13,7 @@ PointerAlignment: Left
 NamespaceIndentation: All
 SpaceAfterTemplateKeyword: false
 BreakConstructorInitializers: BeforeComma
-BraceWrapping:
-  SplitEmptyFunction: false
-  SplitEmptyRecord: false
-  SplitEmptyNamespace: false
+BreakBeforeBraces: Attach
 AllowShortFunctionsOnASingleLine: All
 IndentCaseLabels: true
 IndentCaseBlocks: true

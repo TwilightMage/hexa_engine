@@ -16,11 +16,11 @@
 #include <base_lib/Version.h>
 #include <mutex>
 
+class ITool;
 class TableBase;
 class OgreApp;
 
-namespace OgreBites
-{
+namespace OgreBites {
     class TrayManager;
 }
 
@@ -47,31 +47,26 @@ class IControllable;
 class World;
 class Texture;
 
-namespace reactphysics3d
-{
+namespace reactphysics3d {
     class PhysicsCommon;
 }
 
-namespace SoLoud
-{
+namespace SoLoud {
     class Soloud;
 }
 
-namespace Ogre
-{
+namespace Ogre {
     class Viewport;
     class RenderWindow;
     class Root;
     class GpuProgram;
 
-    namespace RTShader
-    {
+    namespace RTShader {
         class ShaderGenerator;
     }
 } // namespace Ogre
 
-enum class GameStage
-{
+enum class GameStage {
     Unloaded,
     Initialization,
     Loading,
@@ -80,8 +75,7 @@ enum class GameStage
     Unloading
 };
 
-class EXPORT Game : public Module, public std::enable_shared_from_this<Game>
-{
+class EXPORT Game : public Module, public std::enable_shared_from_this<Game> {
     friend AudioChannel;
     friend Audio;
     friend SoundHandle;
@@ -93,16 +87,18 @@ class EXPORT Game : public Module, public std::enable_shared_from_this<Game>
     friend Collision;
     friend SystemIO;
     friend Animation;
+    friend Module;
 
 public:
     Game(const String& name, int argc, char* argv[]);
 
     Path get_module_path(const String& sub_path = "") const override;
 
+    void quit();
+
     void launch();
 
     static void possess(const Shared<IControllable>& controllable);
-    static void focus_ui(const Shared<UIInputElement>& ui_input_reciever);
     static void use_camera(const Shared<CameraComponent>& camera);
 
     static void open_world(const Shared<World>& world);
@@ -115,50 +111,36 @@ public:
 
     static const GameInfo& get_info();
     static const Shared<Settings>& get_settings();
+
     template<typename T>
-    FORCEINLINE static Shared<T> get_settings()
-    {
+    static Shared<T> get_settings() {
         return cast<T>(get_settings());
     }
+
     static const Shared<SaveGame>& get_save_game();
+
     template<typename T>
-    FORCEINLINE static Shared<T> get_save_game()
-    {
+    static Shared<T> get_save_game() {
         return cast<T>(get_save_game());
     }
+
     static const Shared<EventBus>& get_event_bus();
+
     template<typename T>
-    FORCEINLINE static Shared<T> get_event_bus()
-    {
+    static Shared<T> get_event_bus() {
         return cast<T>(get_event_bus());
     }
 
     static void call_on_main_thread(std::function<void()> func);
 
-    static const Path& get_app_path();
+    static Shared<Texture>& get_white_texture() { return instance_->white_texture_; }
+    static Shared<Texture>& get_uv_test_texture() { return instance_->uv_test_texture_; }
 
-    static Shared<Texture> load_texture(const ModuleAssetID& id);
-    static Shared<Texture> create_texture(const Array2D<Color>& pixels, const ModuleAssetID& id);
-    static Shared<Texture> get_texture(const ModuleAssetID& id);
-
-    static Shared<Material> load_material(const ModuleAssetID& id);
-    static Shared<Material> clone_material(const Shared<Material>& material, const ModuleAssetID& new_id);
-    static Shared<Material> get_material(const ModuleAssetID& id);
-
-    FORCEINLINE static Shared<Texture>& get_white_texture()
-    {
-        return instance_->white_texture_;
-    }
-    FORCEINLINE static Shared<Texture>& get_uv_test_texture()
-    {
-        return instance_->uv_test_texture_;
-    }
-
-    static const Shared<Material>& get_basic_material(bool instanced);
+    static Shared<Material> get_basic_material();
     static const Shared<SpriteFont>& get_default_font();
     static const Shared<AudioChannel>& get_general_channel();
     static const List<Shared<Mod>>& get_mods();
-    static const Shared<Module>& get_module_by_name(const Name& module_name);
+    static Shared<Module> get_module_by_name(const Name& module_name);
 
     static uint get_screen_width();
     static uint get_screen_height();
@@ -175,8 +157,7 @@ public:
     static GameStage get_stage();
 
     template<Convertible<Compound::Object> T>
-    Shared<Table<T>> create_table(const Name& name)
-    {
+    Shared<Table<T>> create_table(const Name& name) {
         if (!CheckError(get_stage() == GameStage::Initialization, "Database", "Table %s can be created only during initialization", name.c()))
             return nullptr;
 
@@ -190,7 +171,14 @@ public:
         return cast<Table<T>>(slot);
     }
 
+    template<Convertible<Compound::Object> T>
+    Shared<Table<T>> get_table(const Name& name) {
+        return cast<Table<T>>(tables_.find_or_default(name));
+    }
+
     void on_add_resource_directories(Set<String>& local, Set<String>& global) override;
+
+    const Map<Name, Shared<ITool>>& get_tools() const { return tools_; }
 
 protected:
     virtual void init_game_info(GameInfo& out_info) = 0;
@@ -226,9 +214,6 @@ private:
     bool wheelRolled(float y);
     void windowResized(Ogre::RenderWindow* rw);
 
-    static Shared<Texture> load_texture_path(const Path& path, const Name& name, const Name& module_name);
-    static bool load_shader_program(const ModuleAssetID& id, bool& instancing);
-
     inline static Shared<Game> instance_ = nullptr;
 
     List<String> args_;
@@ -239,7 +224,6 @@ private:
     Shared<EventBus> event_bus_;
 
     // Common
-    Path app_path_;
     Vector2 mouse_pos_;
     Vector2 mouse_delta_;
     Vector3 un_projected_mouse_;
@@ -247,8 +231,6 @@ private:
 
     // Assets
     Map<String, Shared<StaticMesh>> meshes_;
-    Map<ModuleAssetID, Shared<Texture>> textures_;
-    Map<ModuleAssetID, Shared<Material>> materials_;
     Map<String, Shared<Animation>> animations_;
     Map<String, Shared<Audio>> audios_;
     List<Shared<AudioChannel>> audio_channels_;
@@ -268,7 +250,6 @@ private:
     // Gameplay
     Shared<CameraComponent> current_camera_;
     Shared<IControllable> current_controllable_;
-    Shared<UIInputElement> ui_input_element_;
     Shared<World> world_;
 
     // Core
@@ -281,4 +262,5 @@ private:
     Weak<UIElement> pressed_ui_;
     List<std::function<void()>> main_thread_calls_;
     std::mutex main_thread_calls_mutex_;
+    Map<Name, Shared<ITool>> tools_;
 };

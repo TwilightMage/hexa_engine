@@ -1,6 +1,6 @@
 ﻿#include "hexa_engine/Audio.h"
 
-#include "base_lib/Assert.h"
+#include <base_lib/Assert.h>
 #include "hexa_engine/Game.h"
 
 #include <soloud/soloud_wav.h>
