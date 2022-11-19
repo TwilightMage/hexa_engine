@@ -34,7 +34,7 @@ void Texture::put_pixels(const Array2D<Color>& pixels) {
 
 Array2D<Color> Texture::get_pixels() const {
     Array2D<Color> pixels(get_width(), get_height());
-    ogre_texture_->getBuffer()->readData(0, pixels.size() * sizeof(Color), pixels.begin());
+    ogre_texture_->getBuffer()->readData(0, pixels.get_size_total() * sizeof(Color), pixels.begin());
     return pixels;
 }
 

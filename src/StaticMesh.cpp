@@ -133,12 +133,12 @@ uint StaticMesh::get_material_count() const
     return ogre_mesh_->getNumSubMeshes();
 }
 
-const Vector3& StaticMesh::get_bounds_center() const
+Vector3 StaticMesh::get_bounds_center() const
 {
     return cast_object<Vector3>(ogre_mesh_->getBounds().getCenter());
 }
 
-const Vector3& StaticMesh::get_bounds_half_size() const
+Vector3 StaticMesh::get_bounds_half_size() const
 {
     return cast_object<Vector3>(ogre_mesh_->getBounds().getHalfSize());
 }

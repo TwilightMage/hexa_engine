@@ -1,7 +1,6 @@
 #pragma once
 
 #include <base_lib/Name.h>
-#include <base_lib/String.h>
 
 class ITool {
 public:

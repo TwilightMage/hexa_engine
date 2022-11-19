@@ -1,6 +1,6 @@
 ﻿#include "hexa_engine/GeometryEditor.h"
 
-#include <base_lib/Math.h>
+#include <base_lib/Map.h>
 
 Vector3 GeometryEditor::compute_normal(const Vector3& a, const Vector3& b, const Vector3& c) {
     return (c - a).cross_product(b - a).normalized();
